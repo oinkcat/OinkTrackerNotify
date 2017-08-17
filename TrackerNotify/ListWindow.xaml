@@ -1,0 +1,52 @@
+﻿<Window x:Class="TrackerNotify.ListWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Список недавних действий" Height="350" Width="525"
+        ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen"
+        Icon="Resources/notify.ico">
+    
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="VisiConv" />
+    </Window.Resources>
+
+    <Grid>
+        <ListBox ItemsSource="{Binding Actions}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="LightGray" BorderThickness="0">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                            <Image Width="70" Height="70" Margin="0,0,10,0"
+                                   Source="Resources\default.jpg" />
+                            <TextBlock Margin="0,5" LineHeight="20">
+                                <Run FontSize="20" Text="{Binding Description}" />
+                                <LineBreak />
+                                <Run FontSize="14" Text="{Binding ItemTitle}" />
+                                <LineBreak />
+                                <TextBlock FontSize="16" Foreground="Gray" FontStyle="Italic">
+                                    <Run Text="{Binding UserId}" />
+                                    <Run Text=", " />
+                                    <Run Text="{Binding Timestamp, StringFormat=dd.MM - HH:mm}" />
+                                </TextBlock>
+                            </TextBlock>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        
+        <Label FontSize="36" Content="Загрузка..."
+               Visibility="{Binding LoadingStateShown, Converter={StaticResource VisiConv}}"
+               VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        
+        <Border Background="Salmon" Height="40" VerticalAlignment="Top"
+                Opacity="0.85"
+                Visibility="{Binding IsError, Converter={StaticResource VisiConv}}">
+            <Label HorizontalAlignment="Center" Foreground="White" FontSize="20">
+                Нет соединения с Трекером!
+            </Label>
+            <Border.Effect>
+                <DropShadowEffect Direction="-90" Opacity="0.2" />
+            </Border.Effect>
+        </Border>
+    </Grid>
+</Window>
