@@ -24,17 +24,15 @@ namespace TrackerNotify
         /// </summary>
         public void PlaceWindow()
         {
+            const int BordersSize = 8;
+
             double width = SystemParameters.MaximizedPrimaryScreenWidth;
             double height = SystemParameters.MaximizedPrimaryScreenHeight;
 
-            window.Left = width - window.ActualWidth;
-            window.Top = height - window.ActualHeight;
-        }
+            int k = window.WindowStyle == WindowStyle.None ? 2 : 1;
 
-        // Окно потеряло фокус
-        private void window_Deactivated(object sender, EventArgs e)
-        {
-            window.Hide();
+            window.Left = width - window.Width - BordersSize * k;
+            window.Top = height - window.Height - BordersSize * k;
         }
 
         // Окно закрывается
@@ -61,7 +59,6 @@ namespace TrackerNotify
 
             // Общие события
             this.window.Closing += window_Closing;
-            this.window.Deactivated += window_Deactivated;
             this.window.IsVisibleChanged += window_IsVisibleChanged;
         }
     }

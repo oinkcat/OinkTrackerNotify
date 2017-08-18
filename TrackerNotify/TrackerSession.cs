@@ -40,7 +40,48 @@ namespace TrackerNotify
 
             var recentActions = actionsJson.Select(j => RecentAction.FromJson(j));
 
+            // Загрузить аватарки
+            var logins = recentActions.Select(a => a.UserId).Distinct().ToList();
+            logins.Add("default");
+            await DownloadAllMissingUserPics(logins.ToArray());
+
             return recentActions.ToList();
+        }
+
+        // Загрузить все иконки пользователей
+        private async Task DownloadAllMissingUserPics(string[] userLogins)
+        {
+            const string ImgType = "image/jpeg";
+
+            var picsDictionary = SettingsStore.Instance.UserPicsData;
+
+            foreach(string login in userLogins)
+            {
+                if(!picsDictionary.ContainsKey(login))
+                {
+                    string loadAction = String.Concat("tiles/", login, ".jpg");
+
+                    WebResponse picResp = null;
+                    try
+                    {
+                        picResp = await GetActionResponse(loadAction);
+                    }
+                    catch(WebException)
+                    {
+                        continue;
+                    }
+
+                    if(picResp.ContentType == ImgType)
+                    {
+                        using(var imgStream = picResp.GetResponseStream())
+                        {
+                            byte[] buffer = new byte[picResp.ContentLength];
+                            await imgStream.ReadAsync(buffer, 0, buffer.Length);
+                            picsDictionary.Add(login, buffer);
+                        }
+                    }
+                }
+            }
         }
 
         // Обновить cookie для сессии, если просрочена

@@ -66,7 +66,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="WindowOverTray.cs" />
+    <Compile Include="UserIdToPictureConverter.cs" />
+    <Compile Include="WindowOverTrayHelper.cs" />
     <Page Include="LoginDataWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -128,10 +129,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\default.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="notify.ico" />
+    <Resource Include="Resources\bell.png" />
+    <Resource Include="Resources\chime.WAV" />
+    <Content Include="Resources\open-png.png" />
+    <Content Include="Resources\settings-png.png" />
     <Resource Include="Resources\notify.ico" />
     <Resource Include="Resources\settings.ico" />
   </ItemGroup>

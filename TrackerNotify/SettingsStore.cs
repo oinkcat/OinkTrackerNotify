@@ -23,6 +23,11 @@ namespace TrackerNotify
         public static SettingsStore Instance { get; private set; }
 
         /// <summary>
+        /// Запущено ли без предварительных настроек
+        /// </summary>
+        public bool IsCleanRun { get; private set; }
+
+        /// <summary>
         /// Ссылка на сайт Трекера
         /// </summary>
         public string HostURL { get; set; }
@@ -38,6 +43,11 @@ namespace TrackerNotify
         public string LastItemHash { get; set; }
 
         /// <summary>
+        /// Данные иконок пользователей
+        /// </summary>
+        public Dictionary<string, byte[]> UserPicsData { get; private set; }
+
+        /// <summary>
         /// Имеются ли сохраненные настройки
         /// </summary>
         public bool HasStoredSettings
@@ -46,6 +56,17 @@ namespace TrackerNotify
             {
                 return !String.IsNullOrEmpty(HostURL) && 
                        !String.IsNullOrEmpty(EnterToken);
+            }
+        }
+
+        /// <summary>
+        /// Выдать ссылку на вход в Трекер
+        /// </summary>
+        public string TrackerEnterUrl
+        {
+            get
+            {
+                return String.Concat(HostURL, "/enter/", EnterToken);
             }
         }
 
@@ -83,6 +104,10 @@ namespace TrackerNotify
                 this.EnterToken = root.Element(XName.Get("Token")).Value;
                 this.LastItemHash = root.Element(XName.Get("LastHash")).Value;
             }
+            else
+            {
+                IsCleanRun = true;
+            }
         }
 
         /// <summary>
@@ -112,7 +137,10 @@ namespace TrackerNotify
         }
 
         // Синглтон
-        private SettingsStore() { }
+        private SettingsStore()
+        {
+            this.UserPicsData = new Dictionary<string, byte[]>();
+        }
 
         static SettingsStore()
         {
