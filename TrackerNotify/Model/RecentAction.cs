@@ -48,32 +48,76 @@ namespace TrackerNotify.Model
         }
 
         /// <summary>
-        /// Создать объект их данных JSON
+        /// Заполнить дополнительную информацию о действии
+        /// </summary>
+        /// <param name="actionProps">JSON - представление данных</param>
+        public virtual void FillDetails(JObject actionProps)
+        {
+            ItemTitle = (string)GetJsonProp(actionProps, "item_title");
+            Description = (string)GetJsonProp(actionProps, "description");
+
+        }
+
+        /// <summary>
+        /// Создать объект из данных JSON
         /// </summary>
         /// <param name="json">Представление объекта в JSON</param>
         /// <returns>Объект недавнего действия</returns>
         public static RecentAction FromJson(JToken json)
         {
+            const int ProgressTypeId = 3;
+
             if (json is JObject)
             {
-                Func<JObject, string, object> jsonValue = (obj, key) => {
-                    return (obj[key] as JValue).Value;
-                };
+                RecentAction action = null;
 
                 var dataObj = json as JObject;
+                long typeId = (long)GetJsonProp(dataObj, "type");
 
-                return new RecentAction
-                {
-                    UserId = (string)jsonValue(dataObj, "user_id"),
-                    ItemTitle = (string)jsonValue(dataObj, "item_title"),
-                    Description = (string)jsonValue(dataObj, "description"),
-                    Timestamp = (DateTime)jsonValue(dataObj, "ts")
-                };
+                if (typeId == ProgressTypeId)
+                    action = new ProgressRecentAction();
+                else
+                    action = new RecentAction();
+
+                action.UserId = (string)GetJsonProp(dataObj, "user_id");
+                action.Timestamp = (DateTime)GetJsonProp(dataObj, "ts");
+                action.FillDetails(dataObj);
+
+                return action;
             }
             else
             {
                 throw new ApplicationException("Неверный тип данных!");
             }
+        }
+
+        // Выдать значения свойства объекта JSON
+        protected static object GetJsonProp(JObject obj, string propName)
+        {
+            return (obj[propName] as JValue).Value;
+        }
+    }
+
+    /// <summary>
+    /// Недавнее действие изменения прогресса элемента
+    /// </summary>
+    public class ProgressRecentAction : RecentAction
+    {
+        /// <summary>
+        /// Заполнить данные действия изменения прогресса
+        /// </summary>
+        /// <param name="actionProps">JSON - представление данных</param>
+        public override void FillDetails(JObject actionProps)
+        {
+            ItemTitle = (string)GetJsonProp(actionProps, "item_title");
+
+            var additionalData = actionProps["data"] as JArray;
+            int progress = additionalData[0].Value<int>();
+
+            if (progress < 100)
+                Description = String.Format("Прогресс выполнения: {0}%", progress);
+            else
+                Description = "Выполнено";
         }
     }
 }

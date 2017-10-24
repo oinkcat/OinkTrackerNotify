@@ -25,7 +25,7 @@
                             <TextBlock Margin="0,5" LineHeight="20">
                                 <Run FontSize="20" Text="{Binding Description}" />
                                 <LineBreak />
-                                <Run FontSize="14" Text="{Binding ItemTitle}" />
+                                <Run FontSize="14" Text="{Binding ItemTitle}" ToolTip="{Binding ItemTitle}" />
                                 <LineBreak />
                                 <TextBlock FontSize="16" Foreground="Gray" FontStyle="Italic">
                                     <Run Text="{Binding UserId}" />
