@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
 using System.Threading;
 using System.Windows;
 
@@ -17,15 +13,13 @@ namespace TrackerNotify
         private const string MutexName = "Softcat.TrackerNotify";
 
         // Мьютекс, определяющий факт запуска приложения
-        private Mutex singleInstanceMutex;
+        private static Mutex singleInstanceMutex;
 
         // Создать мьютекс единственного запуска приложения
-        private bool TrySetupMutex()
+        private static bool TrySetupMutex()
         {
-            bool isMy;
-            singleInstanceMutex = new Mutex(true, MutexName, out isMy);
-
-            return isMy;
+            singleInstanceMutex = new Mutex(true, MutexName, out bool isOwned);
+            return isOwned;
         }
 
         // Приложение запущено
@@ -34,19 +28,20 @@ namespace TrackerNotify
             // Проверить факт единственного запуска
             if(!TrySetupMutex())
             {
-                MessageBox.Show("Приложение уже запущено", "Оповещения Трекера",
-                                MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                this.Shutdown();
+                MessageBox.Show("Приложение уже запущено",
+                                "Оповещения Трекера",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Exclamation);
+                Shutdown();
                 return;
             }
 
             base.OnStartup(e);
 
-            var listWindow = new ListWindow();
-            Application.Current.MainWindow = listWindow;
-
             await SettingsStore.Instance.Load();
+            bool canStart = true;
 
+            // В случае отсутствия настроек - запросить адрес трекера
             if(!SettingsStore.Instance.HasStoredSettings)
             {
                 var settingWindow = new LoginDataWindow();
@@ -54,12 +49,18 @@ namespace TrackerNotify
 
                 if(!setup)
                 {
-                    Application.Current.Shutdown();
+                    canStart = false;
+                    Shutdown();
                 }
             }
 
             // Главное окно
-            listWindow.StartActivity();
+            if(canStart)
+            {
+                var listWindow = new ListWindow();
+                MainWindow = listWindow;
+                listWindow.StartActivity();
+            }
         }
     }
 }

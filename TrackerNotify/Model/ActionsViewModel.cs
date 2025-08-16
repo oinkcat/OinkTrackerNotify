@@ -85,7 +85,7 @@ namespace TrackerNotify.Model
                 IsError = false;
                 NotifyChange("IsError");
             }
-            catch
+            catch(Exception e)
             {
                 IsError = true;
                 NotifyChange("IsError");

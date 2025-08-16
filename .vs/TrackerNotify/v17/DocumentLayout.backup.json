@@ -1,0 +1,86 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "R:\\VS_Projects\\Work\\TrackerNotify\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{4B3B0FF6-2BF8-4EEE-BD50-600F2C98D9CB}|TrackerNotify\\TrackerNotify.csproj|r:\\vs_projects\\work\\trackernotify\\trackernotify\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B3B0FF6-2BF8-4EEE-BD50-600F2C98D9CB}|TrackerNotify\\TrackerNotify.csproj|solutionrelative:trackernotify\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B3B0FF6-2BF8-4EEE-BD50-600F2C98D9CB}|TrackerNotify\\TrackerNotify.csproj|r:\\vs_projects\\work\\trackernotify\\trackernotify\\trackersession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B3B0FF6-2BF8-4EEE-BD50-600F2C98D9CB}|TrackerNotify\\TrackerNotify.csproj|solutionrelative:trackernotify\\trackersession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 8,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{f2bd8fb8-fc94-3dae-a733-fd993c73cc87}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{ce0010b1-93a1-33bb-8d9c-bcc1bf6c4873}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:132:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "App.xaml.cs",
+              "DocumentMoniker": "R:\\VS_Projects\\Work\\TrackerNotify\\TrackerNotify\\App.xaml.cs",
+              "RelativeDocumentMoniker": "TrackerNotify\\App.xaml.cs",
+              "ToolTip": "R:\\VS_Projects\\Work\\TrackerNotify\\TrackerNotify\\App.xaml.cs",
+              "RelativeToolTip": "TrackerNotify\\App.xaml.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-13T09:00:41.356Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "TrackerSession.cs",
+              "DocumentMoniker": "R:\\VS_Projects\\Work\\TrackerNotify\\TrackerNotify\\TrackerSession.cs",
+              "RelativeDocumentMoniker": "TrackerNotify\\TrackerSession.cs",
+              "ToolTip": "R:\\VS_Projects\\Work\\TrackerNotify\\TrackerNotify\\TrackerSession.cs",
+              "RelativeToolTip": "TrackerNotify\\TrackerSession.cs",
+              "ViewState": "AgIAAHIAAAAAAAAAAAAAAEIAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-13T08:59:45.427Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

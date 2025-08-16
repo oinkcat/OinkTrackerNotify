@@ -4,11 +4,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.ComponentModel;
 using System.Windows.Threading;
-using System.Windows.Data;
 using System.Diagnostics;
 using System.Drawing;
 using TrackerNotify.Model;
-using TrackerNotify.Properties;
 
 using AppResources = TrackerNotify.Properties.Resources;
 
